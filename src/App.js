@@ -7,7 +7,11 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <TrendingTopics />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/hashtag" element={<TrendingTopics />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

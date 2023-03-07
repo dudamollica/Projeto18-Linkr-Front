@@ -1,5 +1,5 @@
 import React from "react";
-import { ContainerHashtag } from "./style";
+import { ContainerHashtag, LinkContainer } from "./style";
 
 const Hashtags = (props) => {
   const { body } = props;
@@ -7,9 +7,11 @@ const Hashtags = (props) => {
   return (
     <ContainerHashtag>
       {body.map((elm) => (
-        <p>
-          <span>#</span> <span>{elm.name}</span>
-        </p>
+        <LinkContainer to={`/hashtag/${elm.name}`}> 
+          <p key={elm.id}>
+            <span>#</span> <span>{elm.name}</span>
+          </p>
+        </LinkContainer>
       ))}
     </ContainerHashtag>
   );
