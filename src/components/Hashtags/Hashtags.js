@@ -1,8 +1,18 @@
 import React from "react";
+import { ContainerHashtag } from "./style";
 
+const Hashtags = (props) => {
+  const { body } = props;
 
-const Hashtags = () => {
-    return <div>Olá Mundo</div>
-}
+  return (
+    <ContainerHashtag>
+      {body.map((elm) => (
+        <p>
+          <span>#</span> <span>{elm.name}</span>
+        </p>
+      ))}
+    </ContainerHashtag>
+  );
+};
 
-export default Hashtags
+export default Hashtags;
