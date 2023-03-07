@@ -1,18 +1,13 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AuthProvider from "./AppContext/auth.js";
+import TrendingTopics from "./components/TrendingComponents/TrendingComponents.js";
 import GlobalStyle from "./Constants/GlobalStyle.js";
 
 function App() {
   return (
     <>
-     <AuthProvider>
-      <BrowserRouter>
-        <GlobalStyle />
-        <Routes>
-     
-        </Routes>
-      </BrowserRouter>
-      </AuthProvider>
+      <GlobalStyle />
+      <TrendingTopics />
     </>
   );
 }
