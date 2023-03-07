@@ -11,6 +11,12 @@ export const ContainerHashtag = styled.div`
     color: #FFFFFF;
     padding: 9px 16px;
 
+    overflow-y: scroll;
+    
+    ::-webkit-scrollbar{
+        width: 1px;
+    }
+
     p {
         margin-bottom: 10px;
     }

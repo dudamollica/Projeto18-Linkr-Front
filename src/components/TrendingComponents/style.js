@@ -11,6 +11,10 @@ export const TrendingContainer = styled.div`
   box-sizing: border-box;
   border-radius: 16px;
   border: none;
+
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const Header = styled.header`
