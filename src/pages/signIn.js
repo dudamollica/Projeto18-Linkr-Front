@@ -1,13 +1,16 @@
 import styled from "styled-components";
+
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 
+
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [isLoading, setIsLoading] = useState(false);
 
   function SignUp(e) {
@@ -18,6 +21,7 @@ function Login() {
       return;
     }
     setIsLoading(true);
+
     const body = {
       email: email,
       password: password,
@@ -29,6 +33,7 @@ function Login() {
         navigate("/timeline");
       })
       .catch((err) => {
+
         if (err.response && err.response.status === 401) {
           alert("Email e/ou senha inválidos! Tente novante!");
           setEmail("");
@@ -38,6 +43,7 @@ function Login() {
         }
       })
       .finally(() => setIsLoading(false));
+
   }
   return (
     <>
@@ -50,18 +56,25 @@ function Login() {
         <FormContainer>
           <Form className="flex" onSubmit={SignUp}>
             <input
+
+              data-test="email-input"
+
               data-test="email"
+
               type="email"
               placeholder="e-mail"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+
             ></input>
             <input
               data-test="password"
+
               type="password"
               placeholder="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+
             ></input>
 
             <button data-test="login-btn" type="submit" disabled={isLoading}>
@@ -74,7 +87,9 @@ function Login() {
           </Form>
           <Link to="/sign-up">
             <LoginCadastro className="flex">
-              <p data-test="sign-up-link">First time? Create an account!</p>
+
+              <p data-test="login-link">First time? Create an account!</p>
+
             </LoginCadastro>
           </Link>
         </FormContainer>
@@ -181,6 +196,7 @@ const Form = styled.form`
   button:disabled {
     opacity: 0;
   }
+
 
   @media (min-width: 768px) {
     margin: 35% 15% 0;
