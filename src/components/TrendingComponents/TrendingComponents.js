@@ -47,11 +47,11 @@ const TrendingTopics = () => {
     {
       name: "web-dev",
     },
-    
+
   ];
 
   return (
-    <TrendingContainer>
+    <TrendingContainer data-test="trending">
       <Header>trending</Header>
       <Line />
       <Hashtags body={body} />

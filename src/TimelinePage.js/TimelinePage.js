@@ -1,11 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import { Header, Profile, Publish, Timeline, TimelineLayout, Form } from "./styled";
+import TredingTopics from '../components/TrendingComponents/TrendingComponents'
 
-export default function TimelinePage(){
-    const[loading, setLoading] = useState(false)
+export default function TimelinePage() {
+    const [loading, setLoading] = useState(false)
 
-    function handleSubmit(e){
+    function handleSubmit(e) {
         e.preventDefault()
         setLoading(true)
 
@@ -16,7 +17,7 @@ export default function TimelinePage(){
         })
     }
 
-    return(
+    return (
         <TimelineLayout>
             <Header>
                 <h1>linkr</h1>
@@ -25,7 +26,6 @@ export default function TimelinePage(){
                     <img />
                 </Profile>
             </Header>
-
             <Timeline>
                 <h1>timeline</h1>
                 <Publish>
@@ -54,10 +54,11 @@ export default function TimelinePage(){
                             </button>
                         </Form>
                     </div>
-                    
+
 
                 </Publish>
             </Timeline>
+            <TredingTopics />
         </TimelineLayout>
     )
 }
