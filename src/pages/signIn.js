@@ -1,16 +1,23 @@
 import styled from "styled-components";
+import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-
-import axios from "axios";
+import { ThreeDots } from "react-loader-spinner";
 
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   function SignUp(e) {
     e.preventDefault();
+
+    if (!email || !password) {
+      alert("Por favor, verifique se todos os campos estão preenchidos!");
+      return;
+    }
+    setIsLoading(true);
     const body = {
       email: email,
       password: password,
@@ -22,8 +29,15 @@ function Login() {
         navigate("/timeline");
       })
       .catch((err) => {
-        alert(`${err.message}`);
-      });
+        if (err.response && err.response.status === 401) {
+          alert("Email e/ou senha inválidos! Tente novante!");
+          setEmail("");
+          setPassword("");
+        } else {
+          alert(`${err.message}`);
+        }
+      })
+      .finally(() => setIsLoading(false));
   }
   return (
     <>
@@ -36,29 +50,31 @@ function Login() {
         <FormContainer>
           <Form className="flex" onSubmit={SignUp}>
             <input
-              data-test="email-input"
+              data-test="email"
               type="email"
               placeholder="e-mail"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
             ></input>
             <input
-              data-test="password-input"
+              data-test="password"
               type="password"
               placeholder="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
             ></input>
 
-            <button data-test="signup-btn" type="submit">
-              Sign In
+            <button data-test="login-btn" type="submit" disabled={isLoading}>
+              {isLoading ? (
+                <ThreeDots type="ThreeDots" color="#FFF" height={13} />
+              ) : (
+                "Sign In"
+              )}
             </button>
           </Form>
           <Link to="/sign-up">
             <LoginCadastro className="flex">
-              <p data-test="login-link">First time? Create an account!</p>
+              <p data-test="sign-up-link">First time? Create an account!</p>
             </LoginCadastro>
           </Link>
         </FormContainer>
@@ -160,6 +176,10 @@ const Form = styled.form`
       background-color: #fff;
       color: #1877f2;
     }
+  }
+
+  button:disabled {
+    opacity: 0;
   }
 
   @media (min-width: 768px) {
