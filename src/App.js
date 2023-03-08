@@ -16,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<SignIn />} />
             <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/hashtag" element={<TrendingTopics />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
