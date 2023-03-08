@@ -4,19 +4,29 @@ import TrendingTopics from "./components/TrendingComponents/TrendingComponents.j
 import GlobalStyle from "./Constants/GlobalStyle.js";
 import TimelinePage from "./TimelinePage.js/TimelinePage.js";
 
+import SignUp from "./pages/signUp.js";
+import SignIn from "./pages/signIn.js";
+
 function App() {
   return (
     <>
-      <GlobalStyle />
-      <BrowserRouter>
-        <Routes>
 
-          <Route path="/timeline" element={ <TimelinePage/> }/>
+
+      <AuthProvider>
+        <BrowserRouter>
+          <GlobalStyle />
+          <Routes>
+            <Route path="/" element={<SignIn />} />
+            <Route path="/sign-up" element={<SignUp />} />
+             <Route path="/timeline" element={ <TimelinePage/> }/>
 
           <Route path="/hashtag" element={<TrendingTopics />} />
+            <Route path="/hashtag" element={<TrendingTopics />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
 
-        </Routes>
-      </BrowserRouter>
+
     </>
   );
 }
