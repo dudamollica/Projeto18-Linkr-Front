@@ -2,16 +2,20 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import AuthProvider from "./AppContext/auth.js";
 import GlobalStyle from "./Constants/GlobalStyle.js";
 
+import SignUp from "./pages/signUp.js";
+import SignIn from "./pages/signIn.js";
+
 function App() {
   return (
     <>
-     <AuthProvider>
-      <BrowserRouter>
-        <GlobalStyle />
-        <Routes>
-     
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <GlobalStyle />
+          <Routes>
+            <Route path="/" element={<SignIn />} />
+            <Route path="/sign-up" element={<SignUp />} />
+          </Routes>
+        </BrowserRouter>
       </AuthProvider>
     </>
   );
