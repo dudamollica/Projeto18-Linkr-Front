@@ -48,7 +48,7 @@ function Login() {
   return (
     <>
       <SignUpScrn className="flex">
-        <LogoContainer className="flex">
+        <LogoContainer>
           <h1>linkr</h1>
           <h3>save, share and discover</h3>
           <h3>the best links on the web</h3>
@@ -56,25 +56,18 @@ function Login() {
         <FormContainer>
           <Form className="flex" onSubmit={SignUp}>
             <input
-
               data-test="email-input"
-
-              data-test="email"
-
               type="email"
               placeholder="e-mail"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-
             ></input>
             <input
               data-test="password"
-
               type="password"
               placeholder="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-
             ></input>
 
             <button data-test="login-btn" type="submit" disabled={isLoading}>
@@ -87,9 +80,7 @@ function Login() {
           </Form>
           <Link to="/sign-up">
             <LoginCadastro className="flex">
-
               <p data-test="login-link">First time? Create an account!</p>
-
             </LoginCadastro>
           </Link>
         </FormContainer>
