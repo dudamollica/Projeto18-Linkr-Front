@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Header, Profile, Publish, Timeline, TimelineLayout, Form } from "./styled";
 import TredingTopics from '../components/TrendingComponents/TrendingComponents'
-import { HashtagContext } from "../AppContext/hashtagContext";
+
 
 export default function TimelinePage() {
     const [loading, setLoading] = useState(false)
