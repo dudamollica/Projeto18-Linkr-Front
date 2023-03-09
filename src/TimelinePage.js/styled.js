@@ -49,10 +49,10 @@ export const Profile = styled.div`
 export const Timeline = styled.main`
     flex-direction: column;
     display: flex;
-    margin-top: 150px;
-    width:30%;
+    width:611px;
 
     h1{
+        margin-top: 150px;
         font-family: 'Oswald', sans-serif;
         font-size: 43px;
         line-height: 64px;
@@ -70,6 +70,7 @@ export const Publish = styled.div`
     background-color: #FFFFFF;
     padding: 20px;
     gap: 18px;
+    margin-bottom: 30px;
 
     img{
         width: 53px;
