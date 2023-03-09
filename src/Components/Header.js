@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { AiOutlineSearch } from "react-icons/ai";
 import { IoIosArrowDown } from "react-icons/io";
-import Photo from "../assets/pexels-lucas-pezeta-2328141.jpg"
+import Photo from "../assets/foto.jpg"
 
 export default function Header(){
     return(
