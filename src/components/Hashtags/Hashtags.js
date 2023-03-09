@@ -19,9 +19,9 @@ const Hashtags = (props) => {
 
   return (
     <ContainerHashtag>
-      {body.map((elm) => (
-        <LinkContainer to={`/hashtag/${elm.name}`} data-test="hashtag" onClick={() => handleClick(elm.name)}>
-          <p key={elm.id}>
+      {body.map((elm, i) => (
+        <LinkContainer to={`/hashtag/${elm.name}`} data-test="hashtag" onClick={() => handleClick(elm.name)} key={elm.name}>
+          <p key={i}>
             <span>#</span> <span>{elm.name}</span>
           </p>
         </LinkContainer>

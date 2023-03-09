@@ -20,7 +20,7 @@ export default function HashtagPage() {
 
                 {hashtag === undefined ? '' :
                     hashtag.map((elm) => (
-                        <Post>PostComponent
+                        <Post key={elm.id}>PostComponent
                         </Post>
                     ))
                 }
