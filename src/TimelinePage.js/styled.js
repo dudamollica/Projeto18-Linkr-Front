@@ -2,14 +2,15 @@ import styled from "styled-components";
 
 export const TimelineLayout = styled.div`
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100vh;
     background-color: #333333;
     position: relative;
+
+    padding-top: 150px;
 `
-/*-----HEADER-----*/ 
+/*-----HEADER-----*/
 export const Header = styled.header`
     display: flex;
     position: fixed;
@@ -45,11 +46,10 @@ export const Profile = styled.div`
         border-radius: 26.5px;
     }
 `
-/*-----TIMELINE-----*/ 
+/*-----TIMELINE-----*/
 export const Timeline = styled.main`
     flex-direction: column;
     display: flex;
-    margin-top: 150px;
     width:30%;
 
     h1{
