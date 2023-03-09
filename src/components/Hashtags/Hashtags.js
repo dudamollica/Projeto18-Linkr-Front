@@ -7,7 +7,7 @@ const Hashtags = (props) => {
   return (
     <ContainerHashtag>
       {body.map((elm) => (
-        <LinkContainer to={`/hashtag/${elm.name}`}> 
+        <LinkContainer to={`/hashtag/${elm.name}`} data-test="hashtag">
           <p key={elm.id}>
             <span>#</span> <span>{elm.name}</span>
           </p>
