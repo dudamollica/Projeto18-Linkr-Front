@@ -22,10 +22,10 @@ function Post(props){
             </div>
 
             <div>
-                <h3>{username}</h3>
-                <p>{description}</p>
+                <h3 data-test="username">{username}</h3>
+                <p data-test="description">{description}</p>
 
-                <UrlLayout>
+                <UrlLayout data-test="link">
                     <div>
                         <p>{""/*metadata.title*/}</p>
                         

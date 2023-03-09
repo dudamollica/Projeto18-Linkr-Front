@@ -88,9 +88,10 @@ export default function TimelinePage(){
                     </div>
 
                 </Publish>
-                {posts.length === 0 ? <h2>There are no posts yet</h2> :
+                {posts.length === 0 ? <h2 data-test="message">There are no posts yet</h2> :
                     posts.map(item => (
                         <Post 
+                            data-test="post"
                             image={item.picture_url} 
                             username={item.username} 
                             description={item.post_text}
