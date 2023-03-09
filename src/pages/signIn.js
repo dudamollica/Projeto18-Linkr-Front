@@ -42,7 +42,7 @@ function Login() {
   return (
     <>
       <SignUpScrn className="flex">
-        <LogoContainer className="flex">
+        <LogoContainer>
           <h1>linkr</h1>
           <h3>save, share and discover</h3>
           <h3>the best links on the web</h3>
