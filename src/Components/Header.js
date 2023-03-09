@@ -2,9 +2,16 @@ import styled from "styled-components";
 import { AiOutlineSearch } from "react-icons/ai";
 import { IoIosArrowDown } from "react-icons/io";
 import Photo from "../assets/foto.jpg"
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Header(){
-    return(
+  const [name, setName] = useState("");
+  const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
+
+     return(
         <ContainerHeader>
             <Titulo>
             <h1>linkr</h1>
@@ -27,26 +34,18 @@ export default function Header(){
 
 const ContainerHeader = styled.div`
     box-sizing: border-box;
-    display: grid;
-    grid-template-columns: auto auto auto;
-    grid-template-rows:  auto auto;
-    grid-template-areas: "titulo input user";
-    gap: 0;
+    display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #151515;
     width: 100%;
     height: 72px;
     @media (max-width: 800px) {
-    grid-template-rows: 72px auto;
-    grid-template-columns: auto auto auto;
-    grid-template-areas: "titulo . user"
-    ". input .";
+    position: relative;
   }
 `
 
 const Titulo = styled.div`
-        grid-area: titulo;
         font-size: 49px;
         font-weight: bold;
         font-family: "Passion One";
@@ -63,12 +62,11 @@ width: 563px;
 height: 45px;
 position: relative;
 @media (max-width: 800px) {
-    width: 350px;
+  max-width: 350px;
   }
 `
 
 const Input = styled.form`
-grid-area: input;
 width: 563px;
   input {
     box-sizing: border-box;
@@ -88,10 +86,13 @@ width: 563px;
 ;
   }
   @media (max-width: 800px) {
-    width: 350px;
+    max-width: 350px;
     margin-top: 10px;
+    position: absolute;
+    left: calc(50% - 175px);
+    top: 70px;
     input{
-        width: 350px;
+      max-width: 350px;
         font-size:17px;
     }
     ::placeholder {
@@ -117,7 +118,6 @@ const Button = styled.button`
 `;
 
 const ContainerUser = styled.div`
-grid-area: user;
 display: flex;
 justify-content: center;
 align-items: center;
