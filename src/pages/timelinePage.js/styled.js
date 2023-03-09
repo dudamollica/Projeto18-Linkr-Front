@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 export const TimelineLayout = styled.div`
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100vh;
     background-color: #333333;
     position: relative;
+    overflow: auto;
 `
-/*-----HEADER-----*/ 
+/*-----HEADER-----*/
 export const Header = styled.header`
     display: flex;
     position: fixed;
@@ -45,7 +45,7 @@ export const Profile = styled.div`
         border-radius: 26.5px;
     }
 `
-/*-----TIMELINE-----*/ 
+/*-----TIMELINE-----*/
 export const Timeline = styled.main`
     flex-direction: column;
     display: flex;
@@ -60,6 +60,31 @@ export const Timeline = styled.main`
         color: #FFFFFF;
         margin-bottom: 45px;
         letter-spacing: 0.03em;
+    }
+
+    h2{
+        font-family: 'Oswald';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 36px;
+        text-align: center;
+        color: #FFFFFF;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 630px){
+        width: 100%;
+
+        h1{
+            margin: 91px 0 19px 17px;
+            font-size: 33px;
+            line-height: 49px;
+        }
+
+        h2{
+            font-size: 20px;
+        }
     }
 `
 export const Publish = styled.div`
@@ -90,6 +115,24 @@ export const Publish = styled.div`
             color: #707070;
             font-weight: 300;
             font-family: 'Lato', sans-serif;
+        }
+    }
+
+    @media (max-width: 630px){
+        text-align: center;
+        padding: 12px;
+        border-radius: 0;
+        margin-bottom: 16px;
+
+        img{
+            display: none;
+        }
+
+        div{
+            
+            p{
+                line-height: 20px;
+            }
         }
     }
 
@@ -139,5 +182,15 @@ export const Form = styled.form`
         font-size: 14px;
         line-height: 17px;
         color: #FFFFFF;
+    }
+
+    @media (max-width: 630px){
+        input:nth-child(2){
+            height: 47px;
+        }
+
+        button{
+            height: 22px;
+        }
     }
 `

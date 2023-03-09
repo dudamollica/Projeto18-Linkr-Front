@@ -10,12 +10,17 @@ function config(token){
     }
 }
 
+function getPosts(token){
+    const promisse = axios.get(`${url}/timeline`, config(token))
+}
+
 function postPublish(body, token){
     const promisse = axios.post(`${url}/timeline`, body, config(token))
     return promisse
 }
 
 const api = {
+    getPosts,
     postPublish,
 }
 

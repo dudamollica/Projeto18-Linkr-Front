@@ -1,13 +1,26 @@
-import { useState, useContext } from "react"; 
-import { Header, Profile, Publish, Timeline, TimelineLayout, Form } from "./styled";
-import AuthProvider from "../AppContext/auth";
-import api from "../services/api"
-import Post from "../Components/Post";
+import { useState, useContext, useEffect } from "react"; 
+import { Header, Profile, Publish, Timeline, TimelineLayout, Form } from "./styled.js";
+import AuthProvider from "../../AppContext/auth.js"
+import api from "../../services/api.js"
+import Post from "../../components/PostComponent.js/Post.js";
 
 export default function TimelinePage(){
     const[loading, setLoading] = useState(false);
     const[formData, setFormData] = useState({url: '', post_text:''});
-    //const {token} = useContext(AuthProvider);
+    const[posts, setPosts] = useState([]);
+   // const {user} = useContext(AuthProvider);
+
+    //useEffect(listPosts, []);
+
+    /*function listPosts(){
+        api.getPosts(user.token)
+        .then(res => {
+            setPosts(res.data)
+        })
+        .catch(err => {
+            console.log(`Ocorreu um erro: ${err.response.data }`)
+        })
+    }*/
 
     function handleChange(e){
         setFormData({ ...formData, [e.target.name]: e.target.value});
@@ -16,11 +29,11 @@ export default function TimelinePage(){
     function handleSubmit(e){
         e.preventDefault();
         setLoading(true);
-
+        //api.postPublish({...formData}, token)
         api.postPublish({...formData})
             .then(res => {
                 setLoading(false)
-                
+                //listPosts();
             })
             .catch((err) => {
                 alert("There was an error publishing your link")
@@ -75,7 +88,17 @@ export default function TimelinePage(){
                     </div>
 
                 </Publish>
-                <Post/>
+                {posts.length === 0 ? <h2>There are no posts yet</h2> :
+                    posts.map(item => (
+                        <Post 
+                            image={item.picture_url} 
+                            username={item.username} 
+                            description={item.post_text}
+                            url={item.url}
+                        />
+                    ))
+                }    
+                <Post/>           
             </Timeline>
         </TimelineLayout>
     )

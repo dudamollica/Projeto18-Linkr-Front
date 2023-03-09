@@ -12,6 +12,9 @@ export const TrendingContainer = styled.div`
   border-radius: 16px;
   border: none;
 
+  margin-top: 107px;
+  margin-left: 20px;
+
   @media only screen and (max-width: 768px) {
     display: none;
   }
