@@ -6,9 +6,8 @@ export const TimelineLayout = styled.div`
     width: 100%;
     height: 100vh;
     background-color: #333333;
-    position: relative;
-
     padding-top: 150px;
+
 `
 /*-----HEADER-----*/
 export const Header = styled.header`
@@ -50,7 +49,7 @@ export const Profile = styled.div`
 export const Timeline = styled.main`
     flex-direction: column;
     display: flex;
-    width:30%;
+    width:auto;
 
     h1{
         font-family: 'Oswald', sans-serif;
@@ -139,4 +138,12 @@ export const Form = styled.form`
         line-height: 17px;
         color: #FFFFFF;
     }
+`
+
+export const Post = styled.div`
+    background-color: white;
+    width: 611px;
+    height: 276px;
+
+    border-radius: 15px;
 `
