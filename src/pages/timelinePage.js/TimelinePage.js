@@ -2,11 +2,9 @@ import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Header, Profile, Publish, Timeline, TimelineLayout, Form } from "./styled.js";
 import UserContext from "../../contexts/userContext"
-import api from "../../services/api"
-import Post from "../../Components/PostComponent.js/Post";
-import UserContext from "../../contexts/userContext.js"
-import api from "../../services/api.js"
+import api from "../../services/api";
 import Post from "../../components/PostComponent.js/Post.js";
+
 import { ThreeDots } from "react-loader-spinner";
 
 export default function TimelinePage({datas}){
