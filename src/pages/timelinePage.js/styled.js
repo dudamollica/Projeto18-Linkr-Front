@@ -7,8 +7,7 @@ export const TimelineLayout = styled.div`
     height: 100vh;
     background-color: #333333;
     position: relative;
-
-    padding-top: 150px;
+    overflow: auto;
 `
 /*-----HEADER-----*/
 export const Header = styled.header`
@@ -50,9 +49,10 @@ export const Profile = styled.div`
 export const Timeline = styled.main`
     flex-direction: column;
     display: flex;
-    width:30%;
+    width:611px;
 
     h1{
+        margin-top: 150px;
         font-family: 'Oswald', sans-serif;
         font-size: 43px;
         line-height: 64px;
@@ -60,6 +60,31 @@ export const Timeline = styled.main`
         color: #FFFFFF;
         margin-bottom: 45px;
         letter-spacing: 0.03em;
+    }
+
+    h2{
+        font-family: 'Oswald';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 36px;
+        text-align: center;
+        color: #FFFFFF;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 630px){
+        width: 100%;
+
+        h1{
+            margin: 91px 0 19px 17px;
+            font-size: 33px;
+            line-height: 49px;
+        }
+
+        h2{
+            font-size: 20px;
+        }
     }
 `
 export const Publish = styled.div`
@@ -70,6 +95,7 @@ export const Publish = styled.div`
     background-color: #FFFFFF;
     padding: 20px;
     gap: 18px;
+    margin-bottom: 30px;
 
     img{
         width: 53px;
@@ -89,6 +115,24 @@ export const Publish = styled.div`
             color: #707070;
             font-weight: 300;
             font-family: 'Lato', sans-serif;
+        }
+    }
+
+    @media (max-width: 630px){
+        text-align: center;
+        padding: 12px;
+        border-radius: 0;
+        margin-bottom: 16px;
+
+        img{
+            display: none;
+        }
+
+        div{
+            
+            p{
+                line-height: 20px;
+            }
         }
     }
 
@@ -138,5 +182,15 @@ export const Form = styled.form`
         font-size: 14px;
         line-height: 17px;
         color: #FFFFFF;
+    }
+
+    @media (max-width: 630px){
+        input:nth-child(2){
+            height: 47px;
+        }
+
+        button{
+            height: 22px;
+        }
     }
 `
