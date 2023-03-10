@@ -93,7 +93,6 @@ export default Login;
 const SignUpScrn = styled.div`
   display: flex;
   flex-direction: column;
-
   @media (min-width: 768px) {
     flex-direction: row;
     width: 100%;
@@ -121,7 +120,6 @@ const LogoContainer = styled.div`
     line-height: 34px;
     font-weight: 700;
   }
-
   @media (min-width: 768px) {
     width: 60%;
     height: 100vh;
@@ -145,7 +143,6 @@ const FormContainer = styled.div`
   width: 100%;
   height: 100vh;
   background-color: #333;
-
   @media (min-width: 768px) {
     width: 40%;
   }
@@ -164,7 +161,6 @@ const Form = styled.form`
     height: 70px;
     border: 1px solid #d5d5d5;
     border-radius: 6px;
-
     padding: 15px;
     font-size: 22px;
   }
@@ -179,17 +175,14 @@ const Form = styled.form`
     font-family: "Oswald", sans-serif;
     font-weight: 700;
     cursor: pointer;
-
     &:hover {
       background-color: #fff;
       color: #1877f2;
     }
   }
-
   button:disabled {
     opacity: 0;
   }
-
   @media (min-width: 768px) {
     margin: 35% 15% 0;
     width: 70%;
@@ -203,7 +196,6 @@ const LoginCadastro = styled.div`
   justify-content: center;
   margin: 30px 0;
   display: flex;
-
   p {
     cursor: pointer;
     color: #fff;

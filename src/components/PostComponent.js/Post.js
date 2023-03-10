@@ -11,7 +11,6 @@ function Post(props){
             const data = await metadata(url);
             setMetadata(data);
         };
-
         fetchMetadata();
     }, [url]) */
 

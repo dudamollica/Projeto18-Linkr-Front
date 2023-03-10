@@ -7,14 +7,11 @@ export const TrendingContainer = styled.div`
   width: 305px;
   height: 405px;
   background-color: #171717;
-
   box-sizing: border-box;
   border-radius: 16px;
   border: none;
-
   margin-top: 107px;
   margin-left: 20px;
-
   @media only screen and (max-width: 768px) {
     display: none;
   }

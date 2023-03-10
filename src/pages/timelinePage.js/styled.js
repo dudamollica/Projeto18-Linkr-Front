@@ -22,7 +22,6 @@ export const Header = styled.header`
     align-items: center;
     justify-content: space-between;
     padding: 20px;
-
     h1{
         font-family: 'Passion One', cursive;
         color: #FFFFFF;
@@ -35,12 +34,10 @@ export const Profile = styled.div`
     display: flex;
     gap: 16px;
     align-items: center;
-
     ion-icon{
         font-size: 25px;
         color: #FFFFFF;
     }
-
     img{
         width: 53px;
         height: 53px;
@@ -53,7 +50,6 @@ export const Timeline = styled.main`
     display: flex;
     width:30%;
     width:611px;
-
     h1{
         margin-top: 150px;
         font-family: 'Oswald', sans-serif;
@@ -64,7 +60,6 @@ export const Timeline = styled.main`
         margin-bottom: 45px;
         letter-spacing: 0.03em;
     }
-
     h2{
         font-family: 'Oswald';
         font-style: normal;
@@ -75,16 +70,13 @@ export const Timeline = styled.main`
         color: #FFFFFF;
         margin: 0 auto;
     }
-
     @media (max-width: 630px){
         width: 100%;
-
         h1{
             margin: 91px 0 19px 17px;
             font-size: 33px;
             line-height: 49px;
         }
-
         h2{
             font-size: 20px;
         }
@@ -99,19 +91,16 @@ export const Publish = styled.div`
     padding: 20px;
     gap: 18px;
     margin-bottom: 30px;
-
     img{
         width: 53px;
         height: 53px;
         border-radius: 26.5px;
         }
-
     div{
         display: flex;
         flex-direction: column;
         width: 100%;
         gap: 13px;
-
         p{
             font-size: 20px;
             line-height: 24px;
@@ -120,17 +109,14 @@ export const Publish = styled.div`
             font-family: 'Lato', sans-serif;
         }
     }
-
     @media (max-width: 630px){
         text-align: center;
         padding: 12px;
         border-radius: 0;
         margin-bottom: 16px;
-
         img{
             display: none;
         }
-
         div{
             
             p{
@@ -138,7 +124,6 @@ export const Publish = styled.div`
             }
         }
     }
-
 `
 export const Form = styled.form`
 	display: flex;
@@ -157,21 +142,17 @@ export const Form = styled.form`
         border: none;
         padding: 6px 13px;
         outline: none;
-
         &::placeholder{
             color: #949494;
             font-weight: 300;
         }
     }
-
     input:nth-child(1){
         height: 30px;
     }
-
     input:nth-child(2){
         height: 66px;
     }
-
     button{
         width: 112px;
         height: 31px;
@@ -179,19 +160,16 @@ export const Form = styled.form`
         border-radius: 5px;
         text-align: center;
         border: none;
-
         font-family: 'Lato';
         font-weight: 700;
         font-size: 14px;
         line-height: 17px;
         color: #FFFFFF;
     }
-
     @media (max-width: 630px){
         input:nth-child(2){
             height: 47px;
         }
-
         button{
             height: 22px;
         }
