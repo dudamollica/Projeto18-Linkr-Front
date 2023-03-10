@@ -4,79 +4,84 @@ import { IoIosArrowDown } from "react-icons/io";
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import UserContext from "../contexts/userContext";
+import UserProvider from "../contexts/userContext.js";
 
-export default function Header(){
+export default function Header() {
   const [searchName, setSearchName] = useState("");
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
-  const {token, setToken, photo, setPhoto} = useContext(UserContext);
+  const { token, setToken, photo, setPhoto } = useContext(UserProvider);
 
   useEffect(() => {
     if (!token) {
       setTimeout(() => {
-      navigate("/")}, 1000);
-  }
-}, []);
+        navigate("/");
+      }, 1000);
+    }
+  }, []);
 
   function searchUsers() {
-        const search = users.map(({ photo, id, username, index }) => (
-            <UserContainer
-                onClick={() => navigate(`/timeline/user/${id}`, { replace: true, state: {} })}
-                key={index}
-            >
-                <img src={photo} alt="" srcset="" />
-                <h4>{username}</h4>
-            </UserContainer>
-        ));
-        return search;
-    }
+    const search = users.map(({ photo, id, username, index }) => (
+      <UserContainer
+        onClick={() =>
+          navigate(`/timeline/user/${id}`, { replace: true, state: {} })
+        }
+        key={index}
+      >
+        <img src={photo} alt="" srcset="" />
+        <h4>{username}</h4>
+      </UserContainer>
+    ));
+    return search;
+  }
 
-    function searchUser(event) {
-        event.preventDefault();
+  function searchUser(event) {
+    event.preventDefault();
 
-        const body = {
-            name: searchName,
-        };
+    const body = {
+      name: searchName,
+    };
 
-        axios.post(
-            `${process.env.REACT_APP_BASE_URL}/timeline/user`,
-            body
-        )        
-        .then((resposta) => setUsers(resposta.data))
+    axios
+      .post(`${process.env.REACT_APP_BASE_URL}/timeline/user`, body)
+      .then((resposta) => setUsers(resposta.data))
 
-        .catch((erro) => console.log(erro.response.data))
-    }
+      .catch((erro) => console.log(erro.response.data));
+  }
 
-     return(
-        <ContainerHeader>
-            <Titulo>
-            <h1>linkr</h1>
-            </Titulo>
-            <Input>
-            <Container displayUsers={users}>
-            <input data-test="search" type="search" placeholder="Search for people" value={searchName} 
+  return (
+    <ContainerHeader>
+      <Titulo>
+        <h1>linkr</h1>
+      </Titulo>
+      <Input>
+        <Container displayUsers={users}>
+          <input
+            data-test="search"
+            type="search"
+            placeholder="Search for people"
+            value={searchName}
             onChange={(e) => {
-              setSearchName(e.target.value); 
-              if (searchName.length >=3) {
+              setSearchName(e.target.value);
+              if (searchName.length >= 3) {
                 searchUser(e);
-              } else { 
+              } else {
                 setUsers([]);
               }
             }}
-            />
-            <Button>
+          />
+          <Button>
             <AiOutlineSearch />
           </Button>
-          </Container>
-          </Input>
-          <UsersContainer displayUsers={users}>{searchUsers()}</UsersContainer>
-          <ContainerUser>
-            <IoIosArrowDown />
-            <img alt="logo" src={photo} />
-          </ContainerUser>
-        </ContainerHeader>
-    )
+        </Container>
+      </Input>
+      <UsersContainer displayUsers={users}>{searchUsers()}</UsersContainer>
+      <ContainerUser>
+        <IoIosArrowDown />
+        <img alt="logo" src={photo} />
+      </ContainerUser>
+    </ContainerHeader>
+  );
 }
 
 const ContainerHeader = styled.div`
