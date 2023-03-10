@@ -4,13 +4,13 @@ import { IoIosArrowDown } from "react-icons/io";
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import UserProvider from "../contexts/userContext.js";
+import UserContext from "../contexts/userContext.js";
 
-export default function Header() {
+export default function Header({datas}) {
   const [searchName, setSearchName] = useState("");
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
-  const { token, setToken, photo, setPhoto } = useContext(UserProvider);
+  const { token, setToken, photo, setPhoto } = useContext(UserContext);
 
   useEffect(() => {
     if (!token) {
@@ -43,7 +43,7 @@ export default function Header() {
     };
 
     axios
-      .post(`${process.env.REACT_APP_BASE_URL}/timeline/user`, body)
+      .post(`${process.env.REACT_APP_API_URL}/timeline/user`, body)
       .then((resposta) => setUsers(resposta.data))
 
       .catch((erro) => console.log(erro.response.data));
