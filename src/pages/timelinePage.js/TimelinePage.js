@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Publish, Timeline, TimelineLayout, Form } from "./styled.js";
 import UserContext from "../../contexts/userContext"
 import api from "../../services/api";
-import Post from "../../Components/PostComponent.js/Post.js";
-import Header from "../../Components/Header.js";
+import Post from "../../components/PostComponent.js/Post.js";
+import Header from "../../components/Header.js";
 
 import { ThreeDots } from "react-loader-spinner";
 

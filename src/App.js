@@ -8,6 +8,8 @@ import SignIn from "./pages/signIn";
 import User from "./pages/User";
 import axios from "axios";
 import UserContext from "./contexts/userContext";
+import AuthProvider from "./contexts/userContext";
+import { HashtagContext } from "./AppContext/hashtagContext.js";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("authToken"));
@@ -15,6 +17,7 @@ function App() {
   const [name, setName] = useState("");
   const [userId, setUserId] = useState("");
   const [datas, setDatas] = useState([]);
+  const [hashtag, setHashtag] = useState(undefined)
 
   useEffect(()=>{
     if(window.location.pathname !== "/" && window.location.pathname !== "/signup"){
@@ -64,7 +67,7 @@ const userContext = {
         </Routes>
         </UserContext.Provider>
     </BrowserRouter>
-  );
+ );
 }
 
 export default App;
