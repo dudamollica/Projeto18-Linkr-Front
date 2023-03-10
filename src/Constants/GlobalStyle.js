@@ -44,23 +44,9 @@ table {
 	border-spacing: 0;
 }
 
-
 *{
 	box-sizing: border-box;
 }
-
-
-.flex{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-`;
-/* 
-font - family:
-font-family: 'Lato', sans-serif;
-font-family: 'Oswald', sans-serif;
-font-family: 'Passion One', cursive; */
-
+`
 
 export default GlobalStyle;

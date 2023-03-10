@@ -7,9 +7,11 @@ export const TimelineLayout = styled.div`
     height: 100vh;
     background-color: #333333;
     position: relative;
+    padding-top: 150px;
     overflow: auto;
 `
 /*-----HEADER-----*/
+
 export const Header = styled.header`
     display: flex;
     position: fixed;
@@ -49,6 +51,7 @@ export const Profile = styled.div`
 export const Timeline = styled.main`
     flex-direction: column;
     display: flex;
+    width:30%;
     width:611px;
 
     h1{
