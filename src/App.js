@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
-import TrendingTopics from "./Components/TrendingComponents/TrendingComponents.js";
+import TrendingTopics from "./components/TrendingComponents/TrendingComponents.js";
 import GlobalStyle from "./Constants/GlobalStyle";
 import TimelinePage from "./pages/timelinePage.js/TimelinePage.js";
 import SignUp from "./pages/signUp";

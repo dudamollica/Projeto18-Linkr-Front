@@ -37,7 +37,7 @@ function Cadastro() {
         if (err.response && err.response.status === 409) {
           alert("Este e-mail já está em uso. Tente outro ou faça login!");
         } else {
-          alert(`${err.message} é aqui`);
+          alert(`${err.message} é aqui é aqui`);
         }
       })
       .finally(() => setIsLoading(false));
