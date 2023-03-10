@@ -1,9 +1,9 @@
 import { useState, useContext, useEffect } from "react"; 
 import { useNavigate } from "react-router-dom";
 import { Header, Profile, Publish, Timeline, TimelineLayout, Form } from "./styled.js";
-import UserContext from "../../contexts/userContext.js"
-import api from "../../services/api.js"
-import Post from "../../components/PostComponent.js/Post.js";
+import UserContext from "../../contexts/userContext"
+import api from "../../services/api"
+import Post from "../../Components/PostComponent.js/Post";
 import { ThreeDots } from "react-loader-spinner";
 
 export default function TimelinePage({datas}){
@@ -60,14 +60,7 @@ export default function TimelinePage({datas}){
 
     return(
         <TimelineLayout>
-            <Header>
-                <h1>linkr</h1>
-                <Profile>
-                    <ion-icon name="chevron-down-outline"></ion-icon>
-                    <img src={datas.picture_url}/>
-                </Profile>
-            </Header>
-
+            <Header />
             <Timeline>
                 <h1>timeline</h1>
                 <Publish data-test="publish-box">

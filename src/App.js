@@ -1,11 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
-import TrendingTopics from "./components/TrendingComponents/TrendingComponents.js";
-import GlobalStyle from "./Constants/GlobalStyle.js";
-import TimelinePage from "./pages/timelinePage.js/TimelinePage";
-import SignUp from "./pages/signUp.js";
-import SignIn from "./pages/signIn.js";
-import UserProvider from "./contexts/userContext.js";
+import TrendingTopics from "./Components/TrendingComponents/TrendingComponents";
+import GlobalStyle from "./Constants/GlobalStyle";
+import TimelinePage from "./Pages/timelinePage.js/TimelinePage";
+import SignUp from "./Pages/signIn";
+import SignIn from "./Pages/signIn";
+import User from "./Pages/User";
+import UserProvider from "./contexts/userContext";
 
 function App() {
   const [datas, setDatas] = useState([])

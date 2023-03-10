@@ -1,15 +1,23 @@
 import styled from "styled-components";
 import { AiOutlineSearch } from "react-icons/ai";
 import { IoIosArrowDown } from "react-icons/io";
-import Photo from "../assets/foto.jpg"
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import UserContext from "../contexts/userContext";
 
 export default function Header(){
-  const [name, setName] = useState("");
+  const [searchName, setSearchName] = useState("");
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
+  const {token, setToken, photo, setPhoto} = useContext(UserContext);
+
+  useEffect(() => {
+    if (!token) {
+      setTimeout(() => {
+      navigate("/")}, 1000);
+  }
+}, []);
 
   function searchUsers() {
         const search = users.map(({ photo, id, username, index }) => (
@@ -28,7 +36,7 @@ export default function Header(){
         event.preventDefault();
 
         const body = {
-            name: name,
+            name: searchName,
         };
 
         axios.post(
@@ -41,16 +49,16 @@ export default function Header(){
     }
 
      return(
-        <ContainerHeader displayUsers={users}>
+        <ContainerHeader>
             <Titulo>
             <h1>linkr</h1>
             </Titulo>
             <Input>
-            <Container>
-            <input data-test="search" type="search" placeholder="Search for people" value={name} 
+            <Container displayUsers={users}>
+            <input data-test="search" type="search" placeholder="Search for people" value={searchName} 
             onChange={(e) => {
-              setName(e.target.value); 
-              if (name.length >=3) {
+              setSearchName(e.target.value); 
+              if (searchName.length >=3) {
                 searchUser(e);
               } else { 
                 setUsers([]);
@@ -65,7 +73,7 @@ export default function Header(){
           <UsersContainer displayUsers={users}>{searchUsers()}</UsersContainer>
           <ContainerUser>
             <IoIosArrowDown />
-            <img alt="logo" src={Photo} />
+            <img alt="logo" src={photo} />
           </ContainerUser>
         </ContainerHeader>
     )

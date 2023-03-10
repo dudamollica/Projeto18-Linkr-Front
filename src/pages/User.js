@@ -1,23 +1,29 @@
 import styled from "styled-components";
 import Header from "../Components/Header";
-import Post from "../Components/Post/Post";
-import { useEffect, useState } from "react";
+import Post from "../Components/PostComponent.js/Post";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import TrendingTopics from "../Components/TrendingComponents/TrendingComponents";
-import { Circles } from "react-loader-spinner";
+import { ThreeDots } from "react-loader-spinner";
+import UserContext from "../contexts/userContext";
 
 export default function User() {
+    const {token, load, setLoad} = useContext(UserContext);
     const [posts, setPosts] = useState("");
     const [trending, setTrending] = useState("");
     const { id } = useParams();
-    const [load, setLoad] = useState("");
 
     useEffect(() => {
         getTrending();
 
+        const auth = {
+        headers: {
+            authorization: `Bearer ${token}` 
+        }}
+
         axios.get(
-            `${process.env.REACT_APP_BASE_URL}/timeline/user/${id}`, 
+            `${process.env.REACT_APP_BASE_URL}/timeline/user/${id}`, auth
         )
         .then((resposta) =>{setLoad(false);
         setPosts(resposta.data)}) 
@@ -25,15 +31,15 @@ export default function User() {
         .catch((erro) => console.log(erro.response.data))
     }, []);
 
-    function renderPosts() {
+    function loadPosts() {
         if (posts) {
             const timeline = posts.map(
                 ({
                     id,
                     username,
-                    picture,
-                    link,
-                    body,
+                    photo,
+                    url,
+                    post,
                     title,
                     image,
                     description,
@@ -43,15 +49,15 @@ export default function User() {
                     <Post
                     key={id}
                     name={username}
-                    profileImage={picture}
-                    url={link}
-                    text={body}
-                    titleUrl={title}
-                    imageUrl={image}
-                    descriptionUrl={description}
-                    creatorId={userId}
+                    photo={photo}
+                    url={url}
+                    text={post}
+                    title={title}
+                    image={image}
+                    description={description}
+                    user={userId}
                     likes={like}
-                    postId={id}
+                    post={id}
                     />
                 )
             );
@@ -67,36 +73,36 @@ export default function User() {
             setTrending(result.data);
         } catch (e) {
             console.log(
-                "An error occured while trying to fetch the trending hashtags, please refresh the page"
+                "An error has occurred"
             );
             console.log(e);
         }
     }
     
     return (
-        <Container>
+        <TimelineContainer>
             <Header />
-            <Content>
-                <ContentBody>
-                    <LeftContent>
+            <Main>
+                <Timeline>
+                    <PostsContainer>
                         <imput
                             debounceTimeout={300}
                         />
                         <h2>{posts ? posts[0].username + "'s posts" : "loading..."}</h2>
                         {
-                            load ? <Circles color="crimson" /> : renderPosts()
+                            load ? <ThreeDots type="ThreeDots" color="#FFF" height={13} /> : loadPosts()
                         }
-                    </LeftContent>
-                    <RightContent>
+                    </PostsContainer>
+                    <TrendingContainer>
                         <TrendingTopics hashtags={trending} />
-                    </RightContent>
-                </ContentBody>
-            </Content>
-        </Container>
+                    </TrendingContainer>
+                </Timeline>
+            </Main>
+        </TimelineContainer>
     );
 }
 
-export const Container = styled.div`
+export const TimelineContainer = styled.div`
     width: 100%;
     min-height: 100vh;
     background-color: #333333;
@@ -106,7 +112,7 @@ export const Container = styled.div`
         color: white;
     }
 `;
-export const Content = styled.div`
+export const Main = styled.div`
     margin-top: 50px;
     width: 100%;
     display: flex;
@@ -115,12 +121,12 @@ export const Content = styled.div`
         margin-top: 42px;
     }
 `;
-export const ContentBody = styled.div`
+export const Timeline = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
 `;
- export const LeftContent = styled.div`
+ export const PostsContainer = styled.div`
     width: 40%;
     display: flex;
     flex-direction: column;
@@ -147,7 +153,7 @@ export const ContentBody = styled.div`
         }
     }
 `;
-export const RightContent = styled.div`
+export const TrendingContainer = styled.div`
     margin-top: 93px;
     width: 20%;
     display: flex;
