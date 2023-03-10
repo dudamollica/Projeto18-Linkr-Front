@@ -37,7 +37,7 @@ function Cadastro() {
         if (err.response && err.response.status === 409) {
           alert("Este e-mail já está em uso. Tente outro ou faça login!");
         } else {
-          alert(`${err.message}`);
+          alert(`${err.message} é aqui`);
         }
       })
       .finally(() => setIsLoading(false));
@@ -104,7 +104,6 @@ export default Cadastro;
 const SignUpScrn = styled.div`
   display: flex;
   flex-direction: column;
-
   @media (min-width: 768px) {
     flex-direction: row;
     width: 100%;
@@ -116,7 +115,7 @@ const LogoContainer = styled.div`
   height: 175px;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   background-color: #151515;
   color: #fff;
   cursor: default;
@@ -132,7 +131,6 @@ const LogoContainer = styled.div`
     line-height: 34px;
     font-weight: 700;
   }
-
   @media (min-width: 768px) {
     width: 60%;
     height: 100vh;
@@ -156,21 +154,21 @@ const FormContainer = styled.div`
   width: 100%;
   height: 100vh;
   background-color: #333;
-
   @media (min-width: 768px) {
     width: 40%;
   }
 `;
 
 const Form = styled.form`
-  margin-top: 40px;
+  display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 10px;
   input {
     font-family: "Oswald", sans-serif;
     font-weight: 700;
-    width: 85%;
-    height: 40px;
+    width: 91%;
+    height: 70px;
     border: 1px solid #d5d5d5;
     border-radius: 6px;
     padding: 15px;
@@ -187,17 +185,14 @@ const Form = styled.form`
     font-family: "Oswald", sans-serif;
     font-weight: 700;
     cursor: pointer;
-
     &:hover {
       background-color: #fff;
       color: #1877f2;
     }
   }
-
   button:disabled {
     opacity: 0;
   }
-
   @media (min-width: 768px) {
     margin: 35% 15% 0;
     width: 70%;
@@ -210,7 +205,7 @@ const Form = styled.form`
 const LoginCadastro = styled.div`
   justify-content: center;
   margin: 30px 0;
-
+  display: flex;
   p {
     cursor: pointer;
     color: #fff;
