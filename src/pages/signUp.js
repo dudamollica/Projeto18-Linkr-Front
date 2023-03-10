@@ -37,7 +37,7 @@ function Cadastro() {
         if (err.response && err.response.status === 409) {
           alert("Este e-mail já está em uso. Tente outro ou faça login!");
         } else {
-          alert(`${err.message}`);
+          alert(`${err.message} é aqui`);
         }
       })
       .finally(() => setIsLoading(false));
@@ -116,7 +116,7 @@ const LogoContainer = styled.div`
   height: 175px;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   background-color: #151515;
   color: #fff;
   cursor: default;
@@ -163,16 +163,19 @@ const FormContainer = styled.div`
 `;
 
 const Form = styled.form`
-  margin-top: 40px;
+  display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 10px;
+
   input {
     font-family: "Oswald", sans-serif;
     font-weight: 700;
-    width: 85%;
-    height: 40px;
+    width: 91%;
+    height: 70px;
     border: 1px solid #d5d5d5;
     border-radius: 6px;
+
     padding: 15px;
     font-size: 22px;
   }
@@ -210,6 +213,7 @@ const Form = styled.form`
 const LoginCadastro = styled.div`
   justify-content: center;
   margin: 30px 0;
+  display: flex;
 
   p {
     cursor: pointer;

@@ -2,11 +2,12 @@ import styled from "styled-components";
 
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { ThreeDots } from "react-loader-spinner";
+import { UserContext } from "../contexts/userContext";
 
 
-function Login() {
+function Login({ setDatas }) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,14 +27,13 @@ function Login() {
       email: email,
       password: password,
     };
-    console.log(body);
     axios
       .post(`${process.env.REACT_APP_API_URL}/signin`, body)
       .then((res) => {
+        setDatas(res.data);
         navigate("/timeline");
       })
       .catch((err) => {
-
         if (err.response && err.response.status === 401) {
           alert("Email e/ou senha inválidos! Tente novante!");
           setEmail("");
@@ -43,7 +43,6 @@ function Login() {
         }
       })
       .finally(() => setIsLoading(false));
-
   }
   return (
     <>
@@ -56,7 +55,7 @@ function Login() {
         <FormContainer>
           <Form className="flex" onSubmit={SignUp}>
             <input
-              data-test="email-input"
+              data-test="email"
               type="email"
               placeholder="e-mail"
               value={email}
@@ -153,16 +152,19 @@ const FormContainer = styled.div`
 `;
 
 const Form = styled.form`
-  margin-top: 40px;
+  display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 10px;
+  padding-top: 10%;
   input {
     font-family: "Oswald", sans-serif;
     font-weight: 700;
-    width: 85%;
-    height: 40px;
+    width: 91%;
+    height: 70px;
     border: 1px solid #d5d5d5;
     border-radius: 6px;
+
     padding: 15px;
     font-size: 22px;
   }
@@ -188,7 +190,6 @@ const Form = styled.form`
     opacity: 0;
   }
 
-
   @media (min-width: 768px) {
     margin: 35% 15% 0;
     width: 70%;
@@ -201,6 +202,7 @@ const Form = styled.form`
 const LoginCadastro = styled.div`
   justify-content: center;
   margin: 30px 0;
+  display: flex;
 
   p {
     cursor: pointer;
