@@ -11,19 +11,58 @@ export default function Header(){
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
 
+  function searchUsers() {
+        const search = users.map(({ photo, id, username, index }) => (
+            <UserContainer
+                onClick={() => navigate(`/timeline/user/${id}`, { replace: true, state: {} })}
+                key={index}
+            >
+                <img src={photo} alt="" srcset="" />
+                <h4>{username}</h4>
+            </UserContainer>
+        ));
+        return search;
+    }
+
+    function searchUser(event) {
+        event.preventDefault();
+
+        const body = {
+            name: name,
+        };
+
+        axios.post(
+            `${process.env.REACT_APP_BASE_URL}/timeline/user`,
+            body
+        )        
+        .then((resposta) => setUsers(resposta.data))
+
+        .catch((erro) => console.log(erro.response.data))
+    }
+
      return(
-        <ContainerHeader>
+        <ContainerHeader displayUsers={users}>
             <Titulo>
             <h1>linkr</h1>
             </Titulo>
             <Input>
             <Container>
-            <input data-test="search" type="search" placeholder="Search for people"/>
+            <input data-test="search" type="search" placeholder="Search for people" value={name} 
+            onChange={(e) => {
+              setName(e.target.value); 
+              if (name.length >=3) {
+                searchUser(e);
+              } else { 
+                setUsers([]);
+              }
+            }}
+            />
             <Button>
             <AiOutlineSearch />
           </Button>
           </Container>
           </Input>
+          <UsersContainer displayUsers={users}>{searchUsers()}</UsersContainer>
           <ContainerUser>
             <IoIosArrowDown />
             <img alt="logo" src={Photo} />
@@ -138,3 +177,40 @@ font-size: 26px;
             }
   }
 `
+
+const UsersContainer  = styled.div`
+    display: ${(props) =>
+        props.displayUsers.length > 0 ? "flex" : "none !important"};
+    flex-direction: column;
+    width: 100%;
+    height: 130px;
+    position: absolute;
+    bottom: -130px;
+    padding: 14px;
+    overflow-y: scroll;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background-color: #e7e7e7;
+`;
+
+const UserContainer  = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 140px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    cursor: pointer;
+    h4 {
+        width: 100%;
+    }
+    img {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        margin-right: 20px;
+        object-fit: cover;
+    }
+`;
+
