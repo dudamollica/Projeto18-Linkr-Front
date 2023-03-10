@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Header from "../Components/Header";
-import Post from "../Components/PostComponent.js/Post.js";
+import Header from "../components/Header";
+import Post from "../components/PostComponent.js/Post.js";
 import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
