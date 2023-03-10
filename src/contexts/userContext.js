@@ -22,5 +22,3 @@ export function AuthProvider({ children }) {
     </UserContext.Provider>
   );
 }
-
-export default UserContext;

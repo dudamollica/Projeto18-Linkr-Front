@@ -10,6 +10,7 @@ export const TimelineLayout = styled.div`
     padding-top: 150px;
     overflow: auto;
 `
+/*-----HEADER-----*/
 
 export const Header = styled.header`
     display: flex;
