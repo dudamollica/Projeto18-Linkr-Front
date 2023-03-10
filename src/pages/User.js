@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import Header from "../Components/Header";
-import Post from "../Components/PostComponent.js/Post";
+import Header from "../components/Header";
+import Post from "../components/PostComponent.js/Post";
 import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import TrendingTopics from "../Components/TrendingComponents/TrendingComponents";
+import TrendingTopics from "../components/TrendingComponents/TrendingComponents";
 import { ThreeDots } from "react-loader-spinner";
 import UserContext from "../contexts/userContext";
 
