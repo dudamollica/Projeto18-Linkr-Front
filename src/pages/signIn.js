@@ -2,11 +2,12 @@ import styled from "styled-components";
 
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { ThreeDots } from "react-loader-spinner";
+import { UserContext } from "../contexts/userContext";
 
 
-function Login() {
+function Login({setDatas}) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,10 +27,10 @@ function Login() {
       email: email,
       password: password,
     };
-    console.log(body);
     axios
       .post(`${process.env.REACT_APP_API_URL}/signin`, body)
       .then((res) => {
+        setDatas(res.data);
         navigate("/timeline");
       })
       .catch((err) => {

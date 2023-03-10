@@ -15,6 +15,10 @@ function Post(props){
         fetchMetadata();
     }, [url]) */
 
+    const handleLinkClick = () => {
+        window.open(url);
+    };
+
     return(
         <PostLayout>
             <div>
@@ -25,7 +29,7 @@ function Post(props){
                 <h3 data-test="username">{username}</h3>
                 <p data-test="description">{description}</p>
 
-                <UrlLayout data-test="link">
+                <UrlLayout data-test="link" onClick={handleLinkClick}>
                     <div>
                         <p>{""/*metadata.title*/}</p>
                         

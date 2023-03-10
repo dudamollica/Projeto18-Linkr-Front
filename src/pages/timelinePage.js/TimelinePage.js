@@ -1,26 +1,29 @@
 import { useState, useContext, useEffect } from "react"; 
+import { useNavigate } from "react-router-dom";
 import { Header, Profile, Publish, Timeline, TimelineLayout, Form } from "./styled.js";
-import AuthProvider from "../../AppContext/auth.js"
+import UserContext from "../../contexts/userContext.js"
 import api from "../../services/api.js"
 import Post from "../../components/PostComponent.js/Post.js";
+import { ThreeDots } from "react-loader-spinner";
 
-export default function TimelinePage(){
-    const[loading, setLoading] = useState(false);
-    const[formData, setFormData] = useState({url: '', post_text:''});
-    const[posts, setPosts] = useState([]);
-   // const {user} = useContext(AuthProvider);
+export default function TimelinePage({datas}){
+    const [loading, setLoading] = useState(false);
+    const [formData, setFormData] = useState({url: '', post_text:''});
+    const [posts, setPosts] = useState(undefined);
+    const [formClear, setFormClear] = useState(false);
 
-    //useEffect(listPosts, []);
+    useEffect(listPosts, []);
 
-    /*function listPosts(){
-        api.getPosts(user.token)
+    function listPosts(){
+        api.getPosts(datas.token)
         .then(res => {
+            console.log(res.data)
             setPosts(res.data)
         })
         .catch(err => {
-            console.log(`Ocorreu um erro: ${err.response.data }`)
+            alert("An error occured while trying to fetch the posts, please refresh the page.")
         })
-    }*/
+    }
 
     function handleChange(e){
         setFormData({ ...formData, [e.target.name]: e.target.value});
@@ -29,17 +32,31 @@ export default function TimelinePage(){
     function handleSubmit(e){
         e.preventDefault();
         setLoading(true);
-        //api.postPublish({...formData}, token)
-        api.postPublish({...formData})
+
+        api.postPublish({...formData}, datas.token)
             .then(res => {
                 setLoading(false)
-                //listPosts();
+                setFormClear(true)
+                setPosts([ ...posts, res.data])
+                listPosts()
             })
             .catch((err) => {
                 alert("There was an error publishing your link")
                 setLoading(false)
+                console.log(err.response.data)
             });
     };
+
+    useEffect(() => {
+        if (formClear) {
+            setFormData({url: '', post_text:''});
+            setFormClear(false);
+        }
+    }, [formClear]);
+
+    if (posts === undefined) {
+        return <ThreeDots type="ThreeDots" color="#FFF" height={13} />
+      }
 
     return(
         <TimelineLayout>
@@ -47,7 +64,7 @@ export default function TimelinePage(){
                 <h1>linkr</h1>
                 <Profile>
                     <ion-icon name="chevron-down-outline"></ion-icon>
-                    <img />
+                    <img src={datas.picture_url}/>
                 </Profile>
             </Header>
 
@@ -98,8 +115,7 @@ export default function TimelinePage(){
                             url={item.url}
                         />
                     ))
-                }    
-                <Post/>           
+                }        
             </Timeline>
         </TimelineLayout>
     )
