@@ -5,10 +5,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../contexts/userContext";
 
-export default function InputSearch() {
+export default function InputSearch({datas}) {
   const [searchName, setSearchName] = useState("");
   const [users, setUsers] = useState([]);
-  const { token, control, setControl, setLoad } = useContext(UserContext);
+  const { token } = useContext(UserContext);
   const navigate = useNavigate();
 
   function searchUsers() {
@@ -17,8 +17,6 @@ export default function InputSearch() {
         onClick={() =>
           navigate(
             `/timeline/user/${id}`,
-            setLoad(true),
-            setControl(!control),
             { replace: true, state: {} }
           )
         }
@@ -45,10 +43,9 @@ export default function InputSearch() {
     };
 
     axios
-      .post(`${process.env.REACT_APP_BASE_URL}/timeline/user`, body, auth)
+      .post(`${process.env.REACT_APP_API_URL}/timeline/user`, body, auth)
       .then((resposta) => {
         setUsers(resposta.data);
-        setControl(!control);
       })
 
       .catch((erro) => console.log(erro.response.data));
