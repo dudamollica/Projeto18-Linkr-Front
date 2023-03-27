@@ -1,23 +1,19 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
-import TrendingTopics from "./Components/TrendingComponents/TrendingComponents.js";
+import TrendingTopics from "./components/TrendingComponents/TrendingComponents";
 import GlobalStyle from "./Constants/GlobalStyle";
-import TimelinePage from "./pages/timelinePage.js/TimelinePage.js";
+import TimelinePage from "./pages/TimelinePage.js/TimelinePage";
 import SignUp from "./pages/signUp";
 import SignIn from "./pages/signIn";
 import User from "./pages/User";
 import axios from "axios";
 import UserContext from "./contexts/userContext";
-import AuthProvider from "./contexts/userContext";
-import { HashtagContext } from "./AppContext/hashtagContext.js";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("authToken"));
   const [photo, setPhoto] = useState("");
   const [name, setName] = useState("");
   const [userId, setUserId] = useState("");
-  const [datas, setDatas] = useState([]);
-  const [hashtag, setHashtag] = useState(undefined)
 
   useEffect(()=>{
     if(window.location.pathname !== "/" && window.location.pathname !== "/signup"){
@@ -34,7 +30,7 @@ async function getUserData(){
         };
         try{
             const result = await axios.get(`${process.env.REACT_APP_API_URL}/data`,config);
-            setPhoto(result.data.photo);
+            setPhoto(result.data.picture_url);
             setName(result.data.username);
         }catch(e){
             localStorage.setItem("authToken", "");
@@ -50,7 +46,7 @@ const userContext = {
     name,
     setName,
     userId,
-    setUserId,
+    setUserId
 };
 
 
@@ -59,9 +55,9 @@ const userContext = {
         <GlobalStyle />
         <UserContext.Provider value={userContext}>
         <Routes>
-          <Route path="/" element={<SignIn setDatas={setDatas} />} />
+          <Route path="/" element={<SignIn  />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/timeline" element={<TimelinePage datas={datas} />} />
+          <Route path="/timeline" element={<TimelinePage />} />
           <Route path="/hashtag/:hashtag" element={<TrendingTopics />} />
           <Route path="/timeline/user/:id" element={<User />} />
         </Routes>

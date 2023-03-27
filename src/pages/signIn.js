@@ -2,43 +2,64 @@ import styled from "styled-components";
 
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { ThreeDots } from "react-loader-spinner";
-import { UserContext } from "../contexts/userContext";
+import UserContext from "../contexts/userContext";
 
 
-function Login({ setDatas }) {
+function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const { token, setToken, setPhoto, setName } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
-
+  console.log("1")
+  useEffect(() => {
+    if(token)
+    navigate('/timeline');
+  }, [])
+  console.log("2")
   function SignUp(e) {
     e.preventDefault();
-
+    console.log("3")
     if (!email || !password) {
+      console.log("4")
       alert("Por favor, verifique se todos os campos estão preenchidos!");
+      console.log("5")
       return;
     }
+    console.log("6")
     setIsLoading(true);
+    console.log("7")
 
     const body = {
       email: email,
       password: password,
     };
+    console.log(JSON.stringify(body));
+    console.log(`${process.env.REACT_APP_API_URL}/signin`);
+
     axios
       .post(`${process.env.REACT_APP_API_URL}/signin`, body)
       .then((res) => {
-        setDatas(res.data);
+        console.log("8")
+        localStorage.setItem("authToken", res.data.token);
+        setPhoto(res.data.photo);
+        setName(res.data.name);
+        setToken(localStorage.getItem("authToken"));
         navigate("/timeline");
       })
       .catch((err) => {
+        alert(`${err.message}`);
+        console.log("9")
         if (err.response && err.response.status === 401) {
+          console.log("10")
           alert("Email e/ou senha inválidos! Tente novante!");
           setEmail("");
           setPassword("");
         } else {
+          console.log("11")
+          console.log(err)
           alert(`${err.message}`);
         }
       })
