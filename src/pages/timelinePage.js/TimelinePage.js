@@ -8,7 +8,8 @@ import NewPost from "../../components/NewPost/NewPost";
 import axios from "axios";
 
 export default function TimelinePage(){
-    const [posts, setPosts] = useState("");
+    const [posts, setPosts] = useState([]);
+    const [page, setPage] = useState(1);
     const { token, setToken, setPhoto, setName } = useContext(UserContext);
     const navigate = useNavigate();
     setToken(localStorage.getItem("authToken"));
@@ -17,64 +18,65 @@ export default function TimelinePage(){
         if(!token){
             navigate('/');
         }
-        if(posts === ""){
-        getPosts();
+        if(posts.length === 0){
+            getPosts();
         }
     }, []);
 
-    async function getPosts(){
+    async function getPosts(page) {
         const config = {
             headers: {
                 Authorization: `Bearer ${token}`,
               },
         };
-        try{
-            const result = await axios.get(`${process.env.REACT_APP_API_URL}/timeline`, config);
-            setPosts(result.data.metadataPosts);
+        try {
+            const result = await axios.get(`${process.env.REACT_APP_API_URL}/timeline?page=${page}`, config);
+            const newPosts = result.data.metadataPosts;
+            setPosts(prevPosts => [...prevPosts, ...newPosts]);
             setPhoto(result.data.userInfo?.picture_url);
             setName(result.data.userInfo?.username);
-        }
-        catch(error){
+            setPage(page + 1);
+        } catch(error) {
             console.log(error);
         }
     }
 
-    function showPosts(){
-        if(posts){
-        const timeline = posts.map(
-            ({
-                id,
-                username,
-                photo,
-                url,
-                post,
-                title,
-                image,
-                description,
-                userId,
-                like
-            }) => (
-                <Post key={id}
-                name={username}
-                photo={photo}
-                url={url}
-                text={post}
-                title={title}
-                image={image}
-                description={description}
-                user={userId}
-                post={id}
-                likes={like}
-                creatorId={userId}
-                setPosts={setPosts}
-                getPosts={getPosts} />
-                )
-                );
-                return timeline;
+    function loadMore() {
+        getPosts(page);
+    }
+
+    function showPosts() {
+        if(posts.length > 0) {
+            return (
+                <InfiniteScroll
+                    pageStart={1}
+                    loadMore={loadMore}
+                    hasMore={true}
+                    loader={<div key={0}>Loading...</div>}
+                    threshold={250}
+                >
+                    {posts.map(({id, username, photo, url, post, title, image, description, userId, like}) => (
+                        <Post
+                            key={id}
+                            name={username}
+                            photo={photo}
+                            url={url}
+                            text={post}
+                            title={title}
+                            image={image}
+                            description={description}
+                            user={userId}
+                            post={id}
+                            likes={like}
+                            creatorId={userId}
+                            setPosts={setPosts}
+                            getPosts={getPosts}
+                        />
+                    ))}
+                </InfiniteScroll>
+            );
         }
-        if (posts === []) {
-            return <span>There are no posts yet</span>;
-        }
+        return <span>There are no posts yet</span>;
     }
 
     return(
