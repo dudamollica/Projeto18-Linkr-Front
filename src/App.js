@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import TrendingTopics from "./components/TrendingComponents/TrendingComponents";
 import GlobalStyle from "./Constants/GlobalStyle";
-import TimelinePage from "./pages/TimelinePage.js/TimelinePage";
+import TimelinePage from "./pages/timelinePage.js/TimelinePage"
 import SignUp from "./pages/signUp";
 import SignIn from "./pages/signIn";
 import User from "./pages/User";
